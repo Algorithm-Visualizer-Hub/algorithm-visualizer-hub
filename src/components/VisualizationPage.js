@@ -1,7 +1,6 @@
 /**
- * Component for displaying a visualization script.
+ * Component for displaying an algorithm visualization.
  */
-
 export default function VisualizationPage() {
 
 };
