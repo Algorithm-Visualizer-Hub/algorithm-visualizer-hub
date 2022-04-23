@@ -9,10 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={HomePage} />
-        <Route path="/user/:userId" element={UserPage} />
-        <Route path="/visualization/:visualizationId" element={VisualizationPage} />
-        <Route path="/collection/:collectionId" element={CollectionPage} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/user/:userId" element={<UserPage />} />
+        <Route path="/visualization/:visualizationId" element={<VisualizationPage />} />
+        <Route path="/collection/:collectionId" element={<CollectionPage />} />
       </Routes>
     </BrowserRouter>
   );
