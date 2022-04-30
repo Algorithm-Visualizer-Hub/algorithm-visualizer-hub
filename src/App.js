@@ -17,9 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/user/:userId" element={<UserPage />} />
-          <Route path="/visualization/:visualizationId" element={<VisualizationPage />} />
-          <Route path="/collection/:collectionId" element={<CollectionPage />} />
+          <Route path="/users/:userId" element={<UserPage />} />
+          <Route path="/visualizations/:visualizationId" element={<VisualizationPage />} />
+          <Route path="/collections/:collectionId" element={<CollectionPage />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>
