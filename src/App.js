@@ -4,6 +4,7 @@ import CollectionPage from "./components/CollectionPage";
 import HomePage from "./components/HomePage";
 import UserPage from "./components/UserPage";
 import VisualizationPage from "./components/VisualizationPage";
+import LoginPage from "./components/LoginPage";
 import UserContext from "./components/UserContext";
 import useLocalStorage from "./components/useLocalStorage";
 
@@ -15,6 +16,7 @@ function App() {
       <UserContext.Provider value={{user: user, saveUser: saveUser}}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/user/:userId" element={<UserPage />} />
           <Route path="/visualization/:visualizationId" element={<VisualizationPage />} />
           <Route path="/collection/:collectionId" element={<CollectionPage />} />
