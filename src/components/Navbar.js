@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import UserContext from "./UserContext";
 
@@ -13,7 +14,7 @@ export default function Navbar() {
   return (
     <nav>
       <div>
-        <a href="/">AVH</a>
+        <Link to="/">AVH</Link>
         <input 
           value={searchStr} 
           placeholder="Search" 
@@ -24,8 +25,8 @@ export default function Navbar() {
         <button>New</button>
         {
           user === null
-            ? <a href="#">Login</a>
-            : <a href="#">My Space</a>
+            ? <Link to="/login">Login</Link>
+            : <Link to={`/users/${user.id}`}>Me</Link>
         }
       </div>
     </nav>
