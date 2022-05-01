@@ -7,6 +7,7 @@ import VisualizationPage from "./components/VisualizationPage";
 import LoginPage from "./components/LoginPage";
 import UserContext from "./components/UserContext";
 import useLocalStorage from "./components/useLocalStorage";
+import CollectionList from "./components/CollectionList";
 
 function App() {
   const [user, saveUser] = useLocalStorage('user');
@@ -17,7 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/users/:userId" element={<UserPage />} />
+          <Route path="/users/:userId" element={<UserPage />}>
+            <Route path="visualizations" />
+            <Route path="collections" element={<CollectionList />} />
+          </Route>
           <Route path="/visualizations/:visualizationId" element={<VisualizationPage />} />
           <Route path="/collections/:collectionId" element={<CollectionPage />} />
         </Routes>
