@@ -1,18 +1,15 @@
-import { useContext } from "react";
 
-import UserContext from "./UserContext";
 
 /**
  * Component for displaying user info.
  */
-export default function UserInfo() {
-  const {user, saveUser} = useContext(UserContext);
+export default function UserInfo(props) {
 
   return (
     <div style={{border: "solid 1px"}}>
-      <div>{user.username}</div>
-      <div>{user.email}</div>
-      <div>Stars earned: {user.starEarned}</div>
+      <div>{props.user.username}</div>
+      <div>{props.user.email}</div>
+      <div>Stars earned: {props.user.starEarned}</div>
     </div>
   );
 };
