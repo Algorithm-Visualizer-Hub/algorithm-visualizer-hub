@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import CollectionInfo from "./CollectionInfo";
 
-import Navbar from "./Navbar";
 import useDataFetch from "./useDataFetch";
 import VisualizationItem from "./VisualizationItem";
 
@@ -16,7 +15,6 @@ export default function CollectionPage() {
 
   return (
     <div>
-      <Navbar />
       {isError && 'An error occurred during data fetching!'}
       {
         isLoading ? (

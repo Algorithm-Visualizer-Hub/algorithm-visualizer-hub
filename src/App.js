@@ -9,6 +9,7 @@ import UserContext from "./components/UserContext";
 import useLocalStorage from "./components/useLocalStorage";
 import CollectionList from "./components/CollectionList";
 import VisualizationList from "./components/VisualizationList";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [user, saveUser] = useLocalStorage('user');
@@ -16,6 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{user: user, saveUser: saveUser}}>
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />

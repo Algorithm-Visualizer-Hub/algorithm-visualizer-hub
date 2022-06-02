@@ -1,7 +1,6 @@
 import { Outlet, useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import Navbar from "./Navbar";
 import UserInfo from "./UserInfo";
 import useDataFetch from "./useDataFetch";
 
@@ -23,7 +22,6 @@ export default function UserPage() {
 
   return (
     <div>
-      <Navbar />
       {isError && 'An error occurred during data fetching!'}
       {
         isLoading ? (

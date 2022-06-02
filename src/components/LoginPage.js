@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 
-import Navbar from "./Navbar";
 import UserContext from "./UserContext";
 import { Navigate } from "react-router-dom";
 
@@ -32,28 +31,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <Navbar />
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-          />
-        </label>
-        <input type="submit" value="Login" />
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Email:
+        <input
+          type="email"
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={event => setPassword(event.target.value)}
+        />
+      </label>
+      <input type="submit" value="Login" />
+    </form>
   );
 };
 
