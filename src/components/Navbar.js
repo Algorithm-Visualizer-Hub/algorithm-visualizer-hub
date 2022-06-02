@@ -69,10 +69,12 @@ export default function Navbar() {
             size="medium"
             edge="start"
             color="inherit"
-            aria-label="open drawer"
+            aria-label="redirect to home page"
             sx={{ mr: 2 }}
           >
-            AVH
+            <Link to='/' style={{color: 'white', textDecoration: 'none'}}>
+              AVH
+            </Link>
           </IconButton>
 
           <Search>
