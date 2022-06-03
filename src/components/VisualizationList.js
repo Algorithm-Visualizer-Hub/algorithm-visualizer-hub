@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import useDataFetch from "./useDataFetch";
-import VisualizationItem from "./VisualizationItem";
+import VisualizationListView from "./VisualizationListView";
 
 /**
  * Component for displaying a list of visualizations created by a user.
@@ -20,17 +20,10 @@ export default function VisualizationList() {
   );
 
   return (
-    <div>
-      {isError && 'An error occurred during data fetching!'}
-      {
-        isLoading ? (
-          <div>Loading...</div>
-        ) : !isError && (
-          <ul>
-            {visualizations.map(visualization => <VisualizationItem key={visualization._id} visualization={visualization} />)}
-          </ul>
-        )
-      }
-    </div>
+    <VisualizationListView
+      isLoading={isLoading}
+      isError={isError}
+      visualizations={visualizations}
+    />
   );
 };

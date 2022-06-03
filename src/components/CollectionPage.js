@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import CollectionInfo from "./CollectionInfo";
 
+import CollectionInfo from "./CollectionInfo";
 import useDataFetch from "./useDataFetch";
-import VisualizationItem from "./VisualizationItem";
+import VisualizationListView from "./VisualizationListView";
 
 /**
  * Component for displaying a collection.
@@ -22,9 +22,11 @@ export default function CollectionPage() {
         ) : !isError && (
           <div>
             <CollectionInfo collection={collection} />
-            <ul>
-              {collection.visIds.map(visualization => <VisualizationItem key={visualization._id} visualization={visualization} />)}
-            </ul>
+            <VisualizationListView
+              isLoading={false}
+              isError={false}
+              visualizations={collection.visIds}
+            />
           </div>
         )
       }
