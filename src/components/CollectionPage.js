@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import CollectionInfo from "./CollectionInfo";
 import useDataFetch from "./useDataFetch";
@@ -18,7 +19,7 @@ export default function CollectionPage() {
       {isError && 'An error occurred during data fetching!'}
       {
         isLoading ? (
-          <div>Loading...</div>
+          <CircularProgress />
         ) : !isError && (
           <div>
             <CollectionInfo collection={collection} />
