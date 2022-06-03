@@ -10,6 +10,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import CreateIcon from '@mui/icons-material/Create';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import UserContext from "./UserContext";
 
@@ -54,12 +56,74 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 /**
- * Navbar component, incl. search bar, new-visualization button, user-page button, GitHub page link.
+ * Navbar component, incl. brand, search bar, new-visualization button, user account, GitHub page link.
  */
 export default function Navbar() {
-  const [searchStr, setSearchStr] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(anchorEl);
 
+  const [searchStr, setSearchStr] = useState('');
   const {user, saveUser} = useContext(UserContext);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    handleMenuClose();
+    saveUser(null);
+  };
+
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {
+        user === null ? (
+          <>
+            <MenuItem
+              component={Link}
+              to='/login'
+              onClick={handleMenuClose}
+            >
+              Login
+            </MenuItem>
+            <MenuItem
+              component={Link}
+              to='/register'
+              onClick={handleMenuClose}
+            >
+              Register
+            </MenuItem>
+          </>
+        ) : (
+          <>
+            <MenuItem
+              component={Link}
+              to={`/users/${user.id}`}
+              onClick={handleMenuClose}
+            >
+              Profile
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </>
+        )
+      }
+    </Menu>
+  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -101,14 +165,21 @@ export default function Navbar() {
               </IconButton>
             </Link>
 
-            <Link to={user === null ? '/login' : `/users/${user.id}`}>
+            {/* <Link to={user === null ? '/login' : `/users/${user.id}`}>
               <IconButton
                 size="large"
                 aria-label="account of current user or login"
               >
                 <AccountCircle style={{color: 'white'}} />
               </IconButton>
-            </Link>
+            </Link> */}
+            <IconButton
+              size="large"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
             
             <a href='https://github.com/Algorithm-Visualizer-Hub' target='_blank'>
               <IconButton
@@ -122,6 +193,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
+      {renderMenu}
     </Box>
   );
 };
