@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 /**
  * Component for displaying information of a visualization.
  */
-export default function VisualizationItem(props) {
+export default function VisualizationItemView(props) {
 
   return (
     <li>

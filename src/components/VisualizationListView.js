@@ -1,6 +1,6 @@
 import CircularProgress from '@mui/material/CircularProgress';
 
-import VisualizationItem from "./VisualizationItem";
+import VisualizationItemView from "./VisualizationItemView";
 
 export default function VisualizationListView(props) {
   return (
@@ -11,7 +11,7 @@ export default function VisualizationListView(props) {
           <CircularProgress />
         ) : !props.isError && (
           <ul>
-            {props.visualizations.map(visualization => <VisualizationItem key={visualization._id} visualization={visualization} />)}
+            {props.visualizations.map(visualization => <VisualizationItemView key={visualization._id} visualization={visualization} />)}
           </ul>
         )
       }
