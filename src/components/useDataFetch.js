@@ -11,19 +11,21 @@ export default function useDataFetch(initialUrl, initialData) {
   const [isError, setIsError] = useState(false);
   
   useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
+    
     async function fetchData() {
-      setIsError(false);
-      setIsLoading(true);
       try {
         const response = await axios.get(url);
         setData(response.data);
-      } catch(e) {
+      } catch (error) {
         setIsError(true);
-        console.log(e);
+        console.log(error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
-
+    
     fetchData();
   }, [url]);
 
