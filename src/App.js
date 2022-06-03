@@ -10,8 +10,9 @@ import useLocalStorage from "./components/useLocalStorage";
 import CollectionList from "./components/CollectionList";
 import VisualizationList from "./components/VisualizationList";
 import Navbar from "./components/Navbar";
+import RegisterPage from "./components/RegisterPage";
 
-function App() {
+export default function App() {
   const [user, saveUser] = useLocalStorage('user');
 
   return (
@@ -21,16 +22,18 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />}/>
+
           <Route path="/users/:userId" element={<UserPage />}>
             <Route path="visualizations" element={<VisualizationList />} />
             <Route path="collections" element={<CollectionList />} />
           </Route>
+
           <Route path="/visualizations/:visualizationId" element={<VisualizationPage />} />
+          
           <Route path="/collections/:collectionId" element={<CollectionPage />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>
   );
-}
-
-export default App;
+};

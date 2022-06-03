@@ -93,33 +93,41 @@ export default function Navbar() {
     >
       {
         user === null ? (
-          <>
+          [
             <MenuItem
+              key='login'
               component={Link}
               to='/login'
               onClick={handleMenuClose}
             >
               Login
-            </MenuItem>
+            </MenuItem>,
             <MenuItem
+              key='register'
               component={Link}
               to='/register'
               onClick={handleMenuClose}
             >
               Register
             </MenuItem>
-          </>
+          ]
         ) : (
-          <>
+          [
             <MenuItem
+              key='profile'
               component={Link}
               to={`/users/${user.id}`}
               onClick={handleMenuClose}
             >
               Profile
+            </MenuItem>,
+            <MenuItem
+              key='logout'
+              onClick={handleLogout}
+            >
+              Logout
             </MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </>
+          ]
         )
       }
     </Menu>

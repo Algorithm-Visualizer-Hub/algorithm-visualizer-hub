@@ -7,11 +7,8 @@ import { Navigate } from "react-router-dom";
 
 import UserContext from "./UserContext";
 
-
-/**
- * Component for user login.
- */
-export default function LoginPage() {
+export default function RegisterPage() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,8 +18,8 @@ export default function LoginPage() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        process.env.REACT_APP_DATA_SERVER_URL + '/api/auth',
-        {email: email, password: password}
+        process.env.REACT_APP_DATA_SERVER_URL + '/api/users',
+        {username: username, email: email, password: password}
       );
       saveUser(response.data);
     } catch (error) {
@@ -46,7 +43,15 @@ export default function LoginPage() {
         <TextField
           label='Email'
           value={email}
+          type='email'
           onChange={event => setEmail(event.target.value)}
+        />
+      </Box>
+      <Box>
+        <TextField
+          label='Username'
+          value={username}
+          onChange={event => setUsername(event.target.value)}
         />
       </Box>
       <Box>
@@ -59,10 +64,9 @@ export default function LoginPage() {
       </Box>
       <Box>
         <Button variant='contained' type="submit">
-          Login
+          Register
         </Button>
       </Box>
     </Box>
   );
 };
-
