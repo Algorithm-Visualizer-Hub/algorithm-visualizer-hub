@@ -1,15 +1,27 @@
+import CircularProgress from '@mui/material/CircularProgress';
 
+import useDataFetch from "./useDataFetch";
 
 /**
- * Component for displaying user info.
+ * Component for fetching and displaying user profile.
  */
 export default function UserInfo(props) {
+  const [{data: user, isLoading, isError}, doFetch] = useDataFetch(process.env.REACT_APP_DATA_SERVER_URL + '/api/users/' + props.userId);
 
   return (
-    <div style={{border: "solid 1px"}}>
-      <div>{props.user.username}</div>
-      <div>{props.user.email}</div>
-      <div>Stars earned: {props.user.starEarned}</div>
-    </div>
+    <>
+      {isError && 'An error occurred when fetching user information!'}
+      {
+        isLoading ? (
+          <CircularProgress />
+        ) : !isError && (
+          <div style={{border: "solid 1px"}}>
+            <div>{user.username}</div>
+            <div>{user.email}</div>
+            <div>Stars earned: {user.starEarned}</div>
+          </div>
+        )
+      }
+    </>
   );
 };
