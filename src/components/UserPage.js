@@ -1,43 +1,58 @@
-import { Outlet, useParams, useNavigate } from "react-router-dom";
+import { Outlet, useParams, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 import UserInfo from "./UserInfo";
 import useDataFetch from "./useDataFetch";
+
+function LinkTab(props) {
+  return (
+    <Tab
+      component={Link}
+      {...props}
+    />
+  );
+}
 
 /**
  * Component for displaying user information, incl. user profile, visualizations, and collections.
  */
 export default function UserPage() {
   const {userId} = useParams();
-  const [{data: user, isLoading, isError}, doFetch] = useDataFetch(process.env.REACT_APP_DATA_SERVER_URL + '/api/users/' + userId);
-  const [contentType, setContentType] = useState();
+  const location = useLocation();
+  const segments = location.pathname.split('/');
+  let initialContentType = 0;
+  if (segments.length >= 4 && segments[3] === 'collections') {
+    initialContentType = 1;
+  }
+  const [contentType, setContentType] = useState(initialContentType);
 
-  const navigate = useNavigate();
-  const handleChange = event => {
-    setContentType(event.target.value);
-    if (event.target.value === 'collections' || event.target.value === 'visualizations') {
-      navigate(event.target.value);
-    }
+  const [{data: user, isLoading, isError}, doFetch] = useDataFetch(process.env.REACT_APP_DATA_SERVER_URL + '/api/users/' + userId);
+
+  const handleChange = (event, newValue) => {
+    setContentType(newValue);
   };
 
   return (
-    <div>
+    <Box sx={{ width: '100%' }}>
       {isError && 'An error occurred during data fetching!'}
       {
         isLoading ? (
-          <div>Loading...</div>
+          <CircularProgress />
         ) : !isError && (
-          <div>
-            <UserInfo user={user} />
-            <select value={contentType} onChange={handleChange}>
-              <option value="please">--Please choose a content type--</option>
-              <option value="collections">collections</option>
-              <option value="visualizations">visualizations</option>
-            </select>
-            <Outlet />
-          </div>
+          <UserInfo user={user} />
         )
       }
-    </div>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={contentType} onChange={handleChange}>
+          <LinkTab label="Visualizations" to='visualizations' />
+          <LinkTab label="Collections" to='collections' />
+        </Tabs>
+      </Box>
+      <Outlet />
+    </Box>
   );
 };

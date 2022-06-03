@@ -25,6 +25,7 @@ export default function App() {
           <Route path="/register" element={<RegisterPage />}/>
 
           <Route path="/users/:userId" element={<UserPage />}>
+            <Route index element={<VisualizationList />} />
             <Route path="visualizations" element={<VisualizationList />} />
             <Route path="collections" element={<CollectionList />} />
           </Route>
